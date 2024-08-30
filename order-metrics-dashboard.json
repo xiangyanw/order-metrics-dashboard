@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 57,
+  "id": 59,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -270,9 +270,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "idp-bootcamp-02-amp",
-          "value": "a016cd9f-b9be-4f2f-a0cf-2757d5358dc7"
+          "selected": true,
+          "text": "idp-bootcamp51-amp",
+          "value": "ddff5918-5c87-414c-9539-1bf755c86db8"
         },
         "hide": 0,
         "includeAll": false,
@@ -290,12 +290,12 @@
       {
         "current": {
           "selected": false,
-          "text": "crossplane-eks-demo-02",
-          "value": "crossplane-eks-demo-02"
+          "text": "crossplane-tenant51",
+          "value": "crossplane-tenant51"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "a016cd9f-b9be-4f2f-a0cf-2757d5358dc7"
+          "uid": "${datasource}"
         },
         "definition": "label_values(cluster)",
         "hide": 0,
@@ -325,6 +325,6 @@
   "timezone": "",
   "title": "Order Service Metrics",
   "uid": "",
-  "version": 7,
+  "version": 2,
   "weekStart": ""
 }
