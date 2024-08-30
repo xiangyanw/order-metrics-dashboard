@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 60,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -41,6 +41,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "req/s",
@@ -54,6 +55,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -78,7 +80,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -118,8 +121,8 @@
       "targets": [
         {
           "datasource": {
-            "uid": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -143,6 +146,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "service time",
@@ -156,6 +160,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -258,6 +263,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "latency",
@@ -271,6 +277,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -372,6 +379,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "processing time",
@@ -385,6 +393,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -487,6 +496,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "latency",
@@ -500,6 +510,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -593,8 +604,7 @@
   ],
   "refresh": "10s",
   "revision": 1,
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "Infrastructure"
   ],
@@ -603,8 +613,8 @@
       {
         "current": {
           "selected": false,
-          "text": "default",
-          "value": "default"
+          "text": "idp-bootcamp-02-amp",
+          "value": "a016cd9f-b9be-4f2f-a0cf-2757d5358dc7"
         },
         "hide": 0,
         "includeAll": false,
@@ -620,7 +630,16 @@
         "type": "datasource"
       },
       {
-        "definition": "label_values(up{job=\"$job\"}, cluster)",
+        "current": {
+          "selected": false,
+          "text": "crossplane-eks-demo-02",
+          "value": "crossplane-eks-demo-02"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "cluster",
@@ -628,8 +647,9 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(up{job=\"$job\"}, cluster)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -638,7 +658,16 @@
         "type": "query"
       },
       {
-        "definition": "label_values(apiserver_request_total, job)",
+        "current": {
+          "selected": false,
+          "text": "apiserver",
+          "value": "apiserver"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(job)",
         "hide": 2,
         "includeAll": false,
         "label": "job",
@@ -646,8 +675,9 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(apiserver_request_total, job)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -666,7 +696,11 @@
             "$__all"
           ]
         },
-        "definition": "label_values(up{job=\"$job\", cluster=\"$cluster\"}, instance)",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(instance)",
         "description": "EKS api server instances",
         "hide": 0,
         "includeAll": true,
@@ -675,8 +709,9 @@
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(up{job=\"$job\", cluster=\"$cluster\"}, instance)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -718,6 +753,6 @@
   "timezone": "utc",
   "title": "Kubernetes / Kube-apiserver (basic)",
   "uid": "",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }
